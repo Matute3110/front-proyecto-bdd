@@ -1,0 +1,33 @@
+<div class="enrollment-container">
+  <h2>Inscripción Académica</h2>
+  <div class="enrollment-card">
+    <div class="input-group">
+      <label>Seleccionar Estudiante</label>
+      <select [(ngModel)]="selectedStudentId" class="custom-select">
+        <option [ngValue]="null">-- Elige un estudiante --</option>
+        @for (est of estudiantes(); track est.id) {
+        <option [value]="est.id">
+          {{ est.nombre }} {{ est.apellidos }} ({{ est.cedula }})
+        </option>
+        }
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Seleccionar Curso</label>
+      <select [(ngModel)]="selectedCourseId" class="custom-select">
+        <option [ngValue]="null">-- Elige un curso --</option>
+        @for (cur of cursos(); track cur.id) {
+        <option [value]="cur.id">
+          {{ cur.nombre }}
+        </option>
+        }
+      </select>
+    </div>
+
+    <button (click)="inscribir()" class="btn-enroll">Generar Inscripción</button>
+    @if (mensaje()) {
+    <div class="alert-success">{{ mensaje() }}</div>
+    }
+  </div>
+</div>

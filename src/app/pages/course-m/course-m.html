@@ -1,0 +1,55 @@
+<div class="course-container">
+  <div class="header">
+    <h2>Gestión de Cursos</h2>
+    <p>La información visualizada proviene en tiempo real de la base de datos.</p>
+  </div>
+
+  <form [formGroup]="cursoForm" (submit)="guardarCurso($event)" class="card-form">
+    <div class="form-row full-width">
+      <label>Nombre del Programa</label>
+      <input type="text" formControlName="nombre" placeholder="Ej. Diseño Gráfico Integral">
+    </div>
+
+    <div class="form-row-group">
+      <div class="form-row">
+        <label>Monto Inicial ($)</label>
+        <input type="number" formControlName="monto_inicial">
+      </div>
+      <div class="form-row">
+        <label>Monto por Cuota ($)</label>
+        <input type="number" formControlName="monto_cuota">
+      </div>
+      <div class="form-row">
+        <label>Nro. de Cuotas</label>
+        <input type="number" formControlName="cantidad_cuotas">
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit" [disabled]="cursoForm.invalid || loading()">
+      {{ loading() ? 'Registrando...' : 'Registrar en Base de Datos' }}
+    </button>
+  </form>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>PROGRAMA</th>
+        <th>PAGO INICIAL</th>
+        <th>CUOTA REGULAR</th>
+        <th>CANT. CUOTAS</th>
+        <th>TOTAL ESTIMADO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let curso of cursos()">
+        <td>{{ curso.nombre }}</td>
+        <td>${{ curso.monto_inicial }}</td>
+        <td>${{ curso.monto_cuota }}</td>
+        <td>{{ curso.cantidad_cuotas }}</td>
+        <td class="text-success fw-bold">
+          ${{ curso.monto_inicial + (curso.monto_cuota * curso.cantidad_cuotas) }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

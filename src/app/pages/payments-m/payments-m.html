@@ -1,0 +1,58 @@
+<div class="payments-container">
+  <h2>Módulo de Caja</h2>
+
+  <div class="search-box">
+    <label>Buscar Estudiante</label>
+    <div class="search-flex">
+      <input 
+        type="text" 
+        [ngModel]="terminoBusqueda()" 
+        (ngModelChange)="terminoBusqueda.set($event)" 
+        (focus)="mostrarLista.set(true)"
+        placeholder="Haz clic para ver la lista o escribe para filtrar...">
+    </div>
+    
+    <ul class="dropdown-list" *ngIf="mostrarLista() && estudiantesFiltrados().length > 0">
+      <li *ngFor="let est of estudiantesFiltrados()" (click)="seleccionarEstudiante(est)">
+        <div class="student-info">
+          <strong>{{ est.nombre }} {{ est.apellidos }}</strong>
+          <span class="cedula">C.I: {{ est.cedula }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="estudianteSeleccionado()" class="student-panel">
+    <div class="student-header">
+      <h3>{{ estudianteSeleccionado().nombre }} {{ estudianteSeleccionado().apellidos }}</h3>
+      <div class="stats">
+        <span class="stat-badge danger">Deuda: ${{ totalDeuda() }}</span>
+        <span class="stat-badge warning">Pendientes: {{ cuotasPendientes() }}</span>
+      </div>
+    </div>
+
+    <table class="pay-table">
+      <thead>
+        <tr>
+          <th>Concepto</th>
+          <th>Estado</th>
+          <th>Monto</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cargo of cargos()">
+          <td>{{ cargo.curso }} - <strong>{{ cargo.tipo }} {{ cargo.numero_cuota > 0 ? '#' + cargo.numero_cuota : '' }}</strong></td>
+          <td>
+            <span class="status-tag" [ngClass]="cargo.estado.toLowerCase()">{{ cargo.estado }}</span>
+          </td>
+          <td class="amount">${{ cargo.monto_esperado }}</td>
+          <td>
+            <button *ngIf="cargo.estado === 'PENDIENTE'" (click)="procesarPago(cargo.cargo_id)" class="btn-pay">Pagar</button>
+            <span *ngIf="cargo.estado === 'PAGADO'" class="text-success">Pagado ✔️</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

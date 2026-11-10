@@ -1,0 +1,28 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  
+  .sidebar {
+    width: 250px;
+    background: #1a237e;
+    color: white;
+    padding: 2rem 1rem;
+    
+    h2 { text-align: center; margin-bottom: 2rem; font-size: 1.2rem; }
+    
+    nav a {
+      display: block;
+      color: #c5cae9;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      transition: background 0.3s;
+      
+      &:hover, &.active { background: #283593; color: white; }
+    }
+  }
+  
+  .content { flex: 1; background: #f5f7fa; padding: 2rem; overflow-y: auto; }
+}

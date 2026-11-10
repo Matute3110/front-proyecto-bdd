@@ -1,0 +1,201 @@
+/* Reemplaza la clase .search-box anterior por esta */
+
+.search-box {
+  background: white; 
+  padding: 2rem; 
+  border-radius: 12px; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+  margin-bottom: 2rem;
+  position: relative;
+
+  label { 
+    display: block; 
+    font-weight: 600; 
+    margin-bottom: 0.8rem; 
+    color: #3f51b5; 
+    font-size: 0.95rem;
+  }
+  
+  .search-flex {
+    display: flex; gap: 1rem;
+    input { 
+      flex: 1; 
+      padding: 1rem 1.2rem; 
+      border: 1.5px solid #e0e0e0; 
+      border-radius: 8px; 
+      outline: none; 
+      font-size: 1rem; 
+      transition: all 0.3s ease;
+      background-color: #fafafa;
+    }
+    input:focus { 
+      border-color: #3f51b5; 
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px rgba(63, 81, 181, 0.1);
+    }
+  }
+
+  .dropdown-list {
+    position: absolute;
+    top: calc(100% - 10px);
+    left: 2rem;
+    right: 2rem;
+    background: white;
+    border: 1px solid #eef0f5;
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 1000;
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    
+    /* Scrollbar estilizado */
+    &::-webkit-scrollbar { width: 8px; }
+    &::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 8px; }
+    &::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 8px; }
+    &::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+    
+    li { 
+      padding: 1rem 1.5rem; 
+      border-bottom: 1px solid #f5f5f5; 
+      cursor: pointer; 
+      transition: all 0.2s ease;
+      
+      .student-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        strong { color: #333; font-size: 1rem; }
+        .cedula { color: #888; font-size: 0.85rem; background: #f0f2f5; padding: 0.2rem 0.6rem; border-radius: 4px; }
+      }
+    }
+    
+    li:last-child { border-bottom: none; }
+    
+    li:hover { 
+      background: #f8f9fe; 
+      
+      .student-info strong { color: #3f51b5; }
+      .cedula { background: #e8eaf6; color: #3f51b5; }
+    }
+  }
+}
+
+/* El resto de los estilos del panel se mantienen igual, solo agrega la clase de éxito para el texto de Pagado */
+.text-success {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+/* El resto se mantiene igual */
+.payments-container {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+
+  h2 {
+    color: #1a237e;
+    margin-bottom: 2rem;
+  }
+}
+
+.student-panel {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+
+  .student-header {
+    background: #f8f9fa;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+
+    h3 {
+      margin: 0;
+      color: #333;
+    }
+
+    .stats {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .stat-badge {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .stat-badge.danger {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .stat-badge.warning {
+      background: #fff3e0;
+      color: #ef6c00;
+    }
+  }
+
+  .pay-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 1.2rem 2rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      color: #666;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .amount {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .status-tag {
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .status-tag.pagado {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .status-tag.pendiente {
+      background: #ffebee;
+      color: #c62828;
+    }
+
+    .btn-pay {
+      background: #2e7d32;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-pay:hover {
+      background: #1b5e20;
+    }
+  }
+}
